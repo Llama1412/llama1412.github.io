@@ -41,10 +41,18 @@ color: White
 	line-height: 20px;
 	color: White
 }
-.about1 {
-	float: left;
-
+.wrapper {
+    width: 80%;
+    height: 200px;
+    margin: auto;
+    padding: 10px;
 }
-.about2 {
-	float: right;
+.left {
+    width: 50%;
+    height: 200px;
+    float: left;
+}
+.right {
+    margin-left: 50%;
+    height: 200px;
 }

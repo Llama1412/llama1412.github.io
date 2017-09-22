@@ -62,9 +62,9 @@ function checkTime(i) {
     return i;
 }
 </script>
-<div>
+<div class="wrapper">
 
-<div class="about1">
+<div class="left">
 <h1>Where are we located?</h1>
 <p>We are located in Oundle School, Peterborough.</p>
 <div>
@@ -72,9 +72,14 @@ function checkTime(i) {
 </div>
 
 </div>
-<div class="about2">
+<div class="right">
 <h1>What do we do?</h1>
 <p>Here at Linux Terminal Tutorials we hope to gently ease new users into the linux community by presenting easy to use guides covering the basics of the linux terminal. We hope these guides will act as the base of a users understanding of the commands.</p>
+<h1>Sign up to our news letter.</h1>
+<p>Enter your details to recieve our monthly newsletter!</p>
+<form>
+  <input type="text" name="email" value="email@domain.com" id="entered">
+  <button type="button" onclick="alert('Your email, '+document.getElementById('entered').value+' has been added to the newsletter recipients!')">Click to Submit!</button>
 </div>
 </div>
 </html>
