@@ -41,3 +41,10 @@ color: White
 	line-height: 20px;
 	color: White
 }
+.about1 {
+	float: left;
+
+}
+.about2 {
+	float: right;
+}
