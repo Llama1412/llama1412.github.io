@@ -1,4 +1,5 @@
 <html>
+Calculator.
 <form name="Calculator" action="calculated.php" method="get">
   <input type="text" name="n1" id="first" value="0">
   <input type="text" name="n2" id="second" value="0">

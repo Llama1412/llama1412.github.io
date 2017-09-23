@@ -27,7 +27,7 @@ if ($operation == "add") {
 
 
 ?>
-<a href="php%20test.php">Return to menu</a>
+<a href="index.php"><br>Return to menu</a>
 
 
 
