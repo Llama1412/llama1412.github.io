@@ -38,12 +38,12 @@
         var dataArray = ["cartridgename = Llamas Cartridge Builder\n"];
         var counter = 1;
 
-        function download(data){
+        function download(data) {
             a = document.createElement("a")
             a.href = "data:text/plain," + encodeURIComponent(data);
             a.download = "CustomCartridge.ini";
             a.click();
-          };
+        };
 
         var mymap = L.map('mapid', {
             layers: [waypoints]
@@ -61,11 +61,11 @@
                 .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
                 .addTo(waypoints);
 
-            dataArray.push("[B"+counter.toString()+"]"); //ID
-            dataArray.push("latitude = "+ e.latlng.lat.toString()); //lat
+            dataArray.push("[B" + counter.toString() + "]"); //ID
+            dataArray.push("latitude = " + e.latlng.lat.toString()); //lat
             dataArray.push("latitudeminutes = 0"); //latmin
             dataArray.push("latitudeseconds = 0"); //latsec
-            dataArray.push("longitude = "+ e.latlng.lng.toString()); //long
+            dataArray.push("longitude = " + e.latlng.lng.toString()); //long
             dataArray.push("longitudeminutes = 0"); //longmin
             dataArray.push("longitudeseconds = 0"); //longsec
             dataArray.push("missiontime = 0"); //mistime
