@@ -1,132 +1,257 @@
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html>
+
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="icon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Georgia At War - Web Tracker</title>
+    <meta name="description" content="Georgia At War - Web Tracker">
+    <meta name="author" content="Alive Hazey">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Linux Terminal Tutorials</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.png">
 
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap.min.css" rel="stylesheet">
+    <!-- Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
 
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-  </head>
+    <!-- iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="GAW">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
 
-  <body onLoad="startTime()">
+    <!-- Style-Sheets CDN-->
+    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+    <link rel="stylesheet" href="../../cdn.klokantech.com/mapbox-gl-js/v0.43.0/mapbox-gl.css" />
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <img src="linux.png" height="40" width="40">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <!-- Style-Sheets Local-->
+    <link rel="stylesheet" type="text/css" href="css/mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/leaflet-ruler.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts/fontawesome/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Helpful Links</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="https://github.com">Github Homepage</a>
-              <a class="dropdown-item" href="http://ubuntu.com">Ubuntu Homepage</a>
-              <a class="dropdown-item" href="https://www.raspberrypi.org/">Raspberry Pi Homepage</a>
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <header>
+        <div class="pixel-navbar-header">
+            <div class="navbar-container">
+                <div class="title-text" data-text="Hoggit - Georgia At War">Hoggit - Georgia At War</div>
+                <div class="navbar-menu">
+                    <a id="pixel-menu-dropdown-toggle" class="drop"><i class="far fa-bars"></i></a>
+                </div>
             </div>
-          </li>
-        </ul>
-		<ul class="nav navbar-nav navbar-right">
-		 <a class="nav-link" id="clock">not loaded</a>
-		</ul>
-      </div>
-    </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-<<<<<<< HEAD
-    <div class="jumbotron2">
-      <div class="jumbotron3">
-        <h1 class="displa" id="greeting">Welcome</h1>
-        <p class="dtext">Welcome to my website about usage of some of the Linux Terminal commands. This is intended for amateurs to the Linux operating system who have recently got hold of a Raspberry Pi or any other computer running a Linux based operating system.</p>
-        <p class="dtext"> Below you will find a showcase of our 3 most recent guides.</p>
-	  </div>
-=======
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3" id="greeting">Welcome</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
->>>>>>> parent of fef8275... Save2
-    </div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
-        <div class="col-md-4">
-<<<<<<< HEAD
-          <h2>Admin Privileges: Sudo</h2>
-          <p>All programs as the root account can prove dangerous, which is why you should use a secondary account. This is fine, but what happens when you want to run a program using admin privilages without having to log out and into another account? ...</p>
-          <p><a class="btn btn-secondary" href="sudo.html" role="button">View Article &raquo;</a></p>
-=======
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
->>>>>>> parent of fef8275... Save2
+        <div id="pixel-menu-dropdown-container" class="pixel-menu-dropdown" style="display:none">
+            <a href="#" class="pixel-menu-item">
+                <div class="title-container">
+                    <span class="title">Map Options (Not Coded)</span>
+                </div>
+            </a>
+            <a href="#" class="pixel-menu-item">
+                <span class="caption">Show Parachutes</span>
+                <input class="pixel-scewed pixel-scewed-skewed" id="cb1" type="checkbox" />
+                <label class="pixel-scewed-btn" data-tg-off="OFF" data-tg-on="ON" for="cb1"></label>
+            </a>
+            <a href="#" class="pixel-menu-item">
+                <span class="caption">Show Sam/AAA</span>
+                <input class="pixel-scewed pixel-scewed-skewed" id="cb2" type="checkbox" />
+                <label class="pixel-scewed-btn" data-tg-off="OFF" data-tg-on="ON" for="cb2"></label>
+            </a>
+            <a href="#" class="pixel-menu-item">
+                <span class="caption">Show Aircraft</span>
+                <input class="pixel-scewed pixel-scewed-skewed" id="cb3" type="checkbox" />
+                <label class="pixel-scewed-btn" data-tg-off="OFF" data-tg-on="ON" for="cb3"></label>
+            </a>
+            <a href="#" class="pixel-menu-item">
+                <span class="caption">Show Trails</span>
+                <input class="pixel-scewed pixel-scewed-skewed" id="cb4" type="checkbox" />
+                <label class="pixel-scewed-btn" data-tg-off="OFF" data-tg-on="ON" for="cb4"></label>
+            </a>
         </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+    </header>
+    <main>
+        <div id="pixel-loader-body" class="pixel-loader-body">
+            <div id="pixel-body-loading" class="loading">
+                <h1>
+                    <span class="let1">L</span>
+                    <span class="let2">O</span>
+                    <span class="let3">A</span>
+                    <span class="let4">D</span>
+                    <span class="let5">I</span>
+                    <span class="let6">N</span>
+                    <span class="let7">G</span>
+                    <span class="let8"> </span>
+                    <span class="let9">M</span>
+                    <span class="let10">A</span>
+                    <span class="let11">P</span>
+                    <span class="let12">.</span>
+                    <span class="let13">.</span>
+                    <span class="let14">.</span>
+                </h1>
+            </div>
         </div>
-      </div>
+        <div class="pixel-statusbar-header">
+            <div id="pixel-status-loader" class="pixel-status-loader">Loading...</div>
+            <div id="statusbar-container" class="statusbar-container">
+                <span class="title">Server Status - </span>
+                <span id="currentStatus" class="status"></span>
+                <span id="currentPlayers" class="datatext"></span>
+                <span id="currentTheater" class="datatext"></span>
+                <span id="currentWeather" class="datatext"></span>
+                <span class="title">- Server Status</span>
+            </div>
+        </div>
+        <div id="pixel-server-announcement">
+            <div class="strip">
+                <span id="pixel-server-announcement-toggle"><i class="far fa-times"></i></span>
+                <span class="control">Server Announcements</span>
+            </div>
+            <div id="test" class="pixel-server-scrollbar-container">
+                <div class="container">
+                    <h2>Web Tracker update 0.42 - 10.30.2018</h2>
+                    <p>
+                        <span>
+                            Additions:<br>
+                            - Added Bearing and Distance tools to bottom right of map.<br>
+                            - Added Filter menu (WIP) <br>
+                            <br>
+                            Bugs:<br>
+                            - Fixed altitudes displaying incorrectly.<br>
+                            - Attempted fix for markers now being removed of dead units <br>
+                        </span>
+                    </p>
+                    <h2>Whats this dashboard?</h2>
+                    <p>
+                        <span>
+                            You're probably wondering what this page is all about. You've probably also noticed it
+                            looks
+                            very similar to another map running on the same server. This version of the dashboard was
+                            built
+                            by Hazey for test purposes to be released to the community for use within their own server
+                            enviroments.
+                        </span>
+                        <br><br>
+                        <span>
+                            You might also notice that this dashboard looks really familiar. If you have played Arma 3
+                            and have used ALiVE Mod this is why. This dashboard was developed by one of the
+                            contributing devs to that project.
+                        </span>
+                    </p>
+                    <h2>Want to see a feature or got questions?</h2>
+                    <p>Message me on the <a href="https://discordapp.com/invite/hoggit">Hoggit Discord. Hazey#5995</a></p>
+                </div>
+            </div>
+        </div>
+        <div id="pixel-objectives-livefeed">
+            <div class="strip clearfix">
+                <span id="pixel-objectives-livefeed-toggle"><i class="fas fa-arrow-right"></i></span>
+                <span id="pixel-objectives-livefeed-label" class="control">Theater Objectives Livefeed</span>
+            </div>
+            <div id="pixel-objectives-livefeed-container" class="container">
+                <div class="button-container">
+                    <button id="livefeed-airfields" class="button-dark objective-tablink selected"><i class="far fa-plane-departure"></i>Airfields</button>
+                    <button id="livefeed-objectives" class="button-dark objective-tablink"><i class="far fa-map-marked-alt"></i>Objectives</button>
+                </div>
+                <div id="pixel-objectives-loader" class="pixel-livefeeds-loader">
+                    <div class="part">
+                        <div class="part">
+                            <div class="part">
+                                <div class="part">
+                                    <div class="part">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="pixel-livefeed-airfields" class="objectiveTabs">
+                    <table class="pixel-livefeed-table">
+                        <tbody id="pixel-livefeed-airfields-body">
 
-      <hr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pixel-livefeed-objectives" class="objectiveTabs" style="display:none">
+                    <table class="pixel-livefeed-table">
+                        <tbody id="pixel-livefeed-objectives-body">
 
-      <footer>
-        <p>&copy; Company 2017</p>
-      </footer>
-    </div> <!-- /container -->
-<<<<<<< HEAD
-=======
-	
-	<script>
-function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('clock').innerHTML =
-    h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
-}
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
-}
-</script>
->>>>>>> parent of fef8275... Save2
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="pixel-aircraft-livefeed">
+            <div class="strip clearfix">
+                <span class="label-text" id="pixel-aircraft-label">Current Aircraft Livefeed</span>
+                <span class="control" id="pixel-aircraft-toggle"><i class="fas fa-arrow-left"></i></span>
+            </div>
+            <div id="pixel-aircraft-livefeed-container" class="container">
+                <div id="pixel-aircraft-button-container" class="button-container">
+                    <button id="livefeed-bluefor" class="button-dark aircraft-tablink selected"><i class="fas fa-fighter-jet"></i>BLUEFOR</button>
+                    <button id="livefeed-opfor" class="button-dark aircraft-tablink"><i class="fas fa-fighter-jet"></i>OPFOR</button>
+                </div>
+                <div id="pixel-aircraft-loader" class="pixel-livefeeds-loader">
+                    <div class="part">
+                        <div class="part">
+                            <div class="part">
+                                <div class="part">
+                                    <div class="part">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="scrollbar-container" class="scrollbar-container">
+                    <div id="pixel-livefeed-bluefor" class="aircraftTabs">
+                        <table class="pixel-aircraft-table blue">
+                            <tbody id="pixel-aircraft-table-blue"></tbody>
+                        </table>
+                    </div>
+                    <div id="pixel-livefeed-opfor" class="aircraftTabs" style="display:none">
+                        <table class="pixel-aircraft-table red">
+                            <tbody id="pixel-aircraft-table-red"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="theaterMap"></div>
+    </main>
+    <footer>
+        <div class="pixel-static-footer">
+            <div class="pixel-footer-runningtime">Mission Time Elapsed: <span id="missionRunningTime"></span></div>
+        </div>
+    </footer>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="../../cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+    <script src="../../cdn.klokantech.com/mapbox-gl-js/v0.43.0/mapbox-gl.js"></script>
+    <script src="../../cdn.klokantech.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.js"></script>
+    <script src="js/responsiveVoice.min.js"></script>
+    <script src="js/leaflet.rotatedMarker.min.js"></script>
+    <script src="js/leaflet-ruler.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script src="js/TimelineMax.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/dashboardController.min.js"></script>
+    <script src="js/baseMarkers.min.js"></script>
+    <script src="js/farpMarkers.min.js"></script>
+    <script src="js/aircraftMarkers.min.js"></script>
+    <script src="js/groundUnits.min.js"></script>
+    <script src="js/serverStats.min.js"></script>
+    <script src="js/statusbar.min.js"></script>
+    <script src="js/objectives.min.js"></script>
+    <script src="js/aircraft.min.js"></script>
+    <script src="js/uptime.min.js"></script>
+    <script src="js/main.min.js"></script>
+</body>
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="popper.min.js"></script>
-    <script src="bootstrap.min.js"></script>
-  </body>
 </html>
