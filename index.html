@@ -58,7 +58,7 @@
 
         function onMapClick(e) {
             var marker = L.marker(e.latlng)
-                .bindPopup("<b>Waypoint </b>" + counter.toString() + " at " + e.latlng)
+                .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
                 .addTo(waypoints);
 
             dataArray.push("[B"+counter.toString()+"]"); //ID
