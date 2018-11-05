@@ -3,11 +3,13 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
         crossorigin="" />
+    <link rel="stylesheet" href="css\cursorstyle.css">
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
         crossorigin=""></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    <script src="icons.js"></script>
+    <script src="js\icons.js"></script>
+    <script src="js\onmapclick.js"></script>
 </head>
 
 
@@ -32,7 +34,7 @@
 
 
 
-<div id="mapid" style="height: 90%;">
+<div id="mapid" style="height: 90%; cursor: crosshair;">
     <script>
         var waypoints = L.layerGroup();
         var dataArrayBackup = ["cartridgename = Llamas Cartridge Builder\n"];
@@ -58,85 +60,6 @@
             accessToken: 'pk.eyJ1IjoibGxhbWExNDEyIiwiYSI6ImNqbzRjczZvZjEzOGIzcW1vcG5kcWh1cHAifQ.DHfYxSbxL-CVRZF1Cqhuaw'
         }).addTo(mymap);
 
-        function onMapClick(e) {
-            if (counter <= 8) {
-                if (counter == 1) {
-                    var marker = L.marker(e.latlng, {icon: B1})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                } else if (counter == 2) {
-                    var marker = L.marker(e.latlng, {icon: B2})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                } else if (counter == 3) {
-                    var marker = L.marker(e.latlng, {icon: B3})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                } else if (counter == 2) {
-                    var marker = L.marker(e.latlng, {icon: B3})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                } else if (counter == 4) {
-                    var marker = L.marker(e.latlng, {icon: B4})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                } else if (counter == 5) {
-                    var marker = L.marker(e.latlng, {icon: B5})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                } else if (counter == 6) {
-                    var marker = L.marker(e.latlng, {icon: B6})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                } else if (counter == 7) {
-                    var marker = L.marker(e.latlng, {icon: B7})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                } else if (counter == 8) {
-                    var marker = L.marker(e.latlng, {icon: B8})
-                    .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
-                    .addTo(waypoints);
-                }
-
-
-
-
-
-
-                if (lastcoords.length == 2) {
-                    lastcoords.shift()
-                };
-                if (lastcoords.length != 0) {
-                    lastcoords.push(e.latlng);
-                    var firstpolyline = new L.Polyline(lastcoords, {
-                        color: 'red',
-                        weight: 3,
-                        opacity: 0.5,
-                        smoothFactor: 1
-                    });
-                    firstpolyline.addTo(waypoints);
-                } else {
-                    lastcoords.push(e.latlng);
-                };
-                dataArray.push("[B" + counter.toString() + "]"); //ID
-                dataArray.push("latitude = " + e.latlng.lat.toString()); //lat
-                dataArray.push("latitudeminutes = 0"); //latmin
-                dataArray.push("latitudeseconds = 0"); //latsec
-                dataArray.push("longitude = " + e.latlng.lng.toString()); //long
-                dataArray.push("longitudeminutes = 0"); //longmin
-                dataArray.push("longitudeseconds = 0"); //longsec
-                dataArray.push("missiontime = 0"); //mistime
-                dataArray.push("velocity = 0"); //velocity
-                dataArray.push("etalocked = false"); //etalock
-                dataArray.push("velocitylocked = false"); //vellock
-                dataArray.push("istargetpoint = false"); //target?
-                dataArray.push(""); //newline
-
-                counter = counter + 1;
-            } else {
-                alert("Max limit reached!");
-            };
-        };
 
         function clearAll(e) {
             waypoints.clearLayers();
