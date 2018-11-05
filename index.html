@@ -37,6 +37,7 @@
         var dataArrayBackup = ["cartridgename = Llamas Cartridge Builder\n"];
         var dataArray = ["cartridgename = Llamas Cartridge Builder\n"];
         var counter = 1;
+        var lastcoords = [];
 
         function download(data) {
             a = document.createElement("a")
@@ -60,7 +61,21 @@
             var marker = L.marker(e.latlng)
                 .bindPopup("<b>Waypoint </b> B" + counter.toString() + " <b>at</b> " + e.latlng)
                 .addTo(waypoints);
-
+            if (lastcoords.length == 2) {
+                lastcoords.shift()
+            };
+            if (lastcoords.length != 0) {
+                lastcoords.push(e.latlng);
+                var firstpolyline = new L.Polyline(lastcoords, {
+                    color: 'red',
+                    weight: 3,
+                    opacity: 0.5,
+                    smoothFactor: 1
+                });
+                firstpolyline.addTo(waypoints);
+            } else {
+                lastcoords.push(e.latlng);
+            };
             dataArray.push("[B" + counter.toString() + "]"); //ID
             dataArray.push("latitude = " + e.latlng.lat.toString()); //lat
             dataArray.push("latitudeminutes = 0"); //latmin
