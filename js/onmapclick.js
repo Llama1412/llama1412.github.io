@@ -68,6 +68,7 @@ function onMapClick(e) {
                 smoothFactor: 1
             });
             firstpolyline.addTo(waypoints);
+            totaldistance = e.latlng.distanceTo(lastcoords[0]);
         } else {
             lastcoords.push(e.latlng);
         };
@@ -85,6 +86,7 @@ function onMapClick(e) {
         dataArray.push("istargetpoint = false"); //target?
         dataArray.push(""); //newline
 
+        document.getElementById("distance") = " " + totaldistance/1000 +KM;
         counter = counter + 1;
     } else {
         alert("Max limit reached!");
