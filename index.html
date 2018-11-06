@@ -72,7 +72,7 @@
         function beginLoad(jsonobject) {
             var i;
             for (i = 0; i < jsonobject.objects.length; i++) {
-                if (jsonobject.objects[i].Coalition == "Allies") {
+                if (jsonobject.objects[i].Coalition == "Allies" && jsonobject.objects[i].Flags.Born == true) {
                     console.log(jsonobject.objects[i].Name);
                     marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long])
                         .bindPopup(jsonobject.objects[i].Name)
