@@ -67,7 +67,7 @@ var aaaico = L.icon({
     iconSize:     [30, 30], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
 });
 
 var adico = L.icon({
@@ -75,7 +75,7 @@ var adico = L.icon({
     iconSize:     [30, 30], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
 });
 
 var radarico = L.icon({
@@ -83,7 +83,7 @@ var radarico = L.icon({
     iconSize:     [30, 30], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
 });
 
 
@@ -92,7 +92,7 @@ var UNKNOWN = L.icon({
     iconSize:     [30, 30], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
 });
 
 var manpadico = L.icon({
@@ -100,7 +100,7 @@ var manpadico = L.icon({
     iconSize:     [30, 30], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
 });
 
 var staticaaico = L.icon({
@@ -108,5 +108,5 @@ var staticaaico = L.icon({
     iconSize:     [30, 30], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
 });
