@@ -134,3 +134,11 @@ var outpostico = L.icon({
     iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
     popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
 });
+
+var airportico = L.icon({
+    iconUrl: 'icons/airport.png',
+    iconSize:     [40, 40], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
+});
