@@ -84,6 +84,7 @@
         };
 
         function addTargetWaypoint(lat, long) {
+            var latlng = L.latLng(lat, long);
             console.log(counter);
             if (counter <= 8) {
                 if (counter == 1) {
@@ -155,6 +156,7 @@
                     lastcoords.shift()
                 };
                 if (lastcoords.length != 0) {
+                    totaldistance = totaldistance + latlng.distanceTo(lastcoords[0]);
                     lastcoords.push([lat, long]);
                     var firstpolyline = new L.Polyline(lastcoords, {
                         color: 'red',
@@ -163,7 +165,6 @@
                         smoothFactor: 1
                     });
                     firstpolyline.addTo(waypoints);
-                    totaldistance =  totaldistance + e.latlng.distanceTo(lastcoords[0]);
                 } else {
                     lastcoords.push([lat, long]);
                 };
@@ -181,7 +182,7 @@
                 dataArray.push("istargetpoint = true"); //target?
                 dataArray.push(""); //newline
 
-                document.getElementById("distancepara").innerHTML = "Total route distance is:" +  " <b>" + (totaldistance/1000).toFixed(0) + "KM</b>";
+                document.getElementById("distancepara").innerHTML = "Total route distance is:" + " <b>" + (totaldistance / 1000).toFixed(0) + "KM</b>";
                 counter = counter + 1;
             } else {
                 alert("Max limit reached!");
@@ -353,7 +354,7 @@
                         smoothFactor: 1
                     });
                     firstpolyline.addTo(waypoints);
-                    totaldistance =  totaldistance + e.latlng.distanceTo(lastcoords[0]);
+                    totaldistance = totaldistance + e.latlng.distanceTo(lastcoords[0]);
                 } else {
                     lastcoords.push(e.latlng);
                 };
@@ -371,14 +372,13 @@
                 dataArray.push("istargetpoint = false"); //target?
                 dataArray.push(""); //newline
 
-                document.getElementById("distancepara").innerHTML = "Total route distance is:" +  " <b>" + (totaldistance/1000).toFixed(0) + "KM</b>";
+                document.getElementById("distancepara").innerHTML = "Total route distance is:" + " <b>" + (
+                    totaldistance / 1000).toFixed(0) + "KM</b>";
                 counter = counter + 1;
             } else {
                 alert("Max limit reached!");
             };
         };
-
-
 
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -395,7 +395,8 @@
             lastcoords = [];
             counter = 1;
             totaldistance = 0;
-            document.getElementById("distancepara").innerHTML = "Total route distance is:" +  " <b>" + (totaldistance/1000).toFixed(0) + "KM</b>";
+            document.getElementById("distancepara").innerHTML = "Total route distance is:" + " <b>" + (totaldistance /
+                1000).toFixed(0) + "KM</b>";
         };
 
         mymap.on('click', onMapClick);
