@@ -23,13 +23,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <button id="clearButton" type="button" class="btn btn-primary" onclick="clearAll()">Clear</button>
-            </li>
-            <li class="nav-item">
-                <button id="exportButton" type="button" class="btn btn-primary" onclick="download(dataArray.join('\n'))">Export</button>
+                <button id="clearButton" type="button" class="btn btn-danger" onclick="clearAll()">Clear</button>
             </li>
             <li class="nav-item">
                 <button id="updateButton" type="button" class="btn btn-primary" onclick="getJSON()">Update targets</button>
+            </li>
+            <li class="nav-item">
+                <button id="exportButton" type="button" class="btn btn-success" onclick="download(dataArray.join('\n'))">Export</button>
             </li>
 
         </ul>
@@ -42,6 +42,7 @@
 <div id="mapid" style="height: 90%; cursor: crosshair;">
     <script>
         var waypoints = L.layerGroup();
+        var targets = L.layerGroup();
         var dataArrayBackup = ["cartridgename = Llamas Cartridge Builder\n"];
         var dataArray = ["cartridgename = Llamas Cartridge Builder\n"];
         var counter = 1;
@@ -49,7 +50,7 @@
         var lastcoords = [];
 
         var mymap = L.map('mapid', {
-            layers: [waypoints]
+            layers: [waypoints, targets]
         }).setView([45.003105, 37.34828], 13);
 
         function getJSON() {
@@ -74,13 +75,15 @@
 
 
         function beginLoad(jsonobject) {
+            targets.clearLayers();
             var i;
             for (i = 0; i < jsonobject.objects.length; i++) {
-                if (jsonobject.objects[i].Coalition == "Allies" && jsonobject.objects[i].Flags.Born == true) {
+                if (jsonobject.objects[i].Coalition == "Allies" && jsonobject.objects[i].Flags.Born == true &&
+                    jsonobject.objects[i].Type.level1 == 2) {
                     console.log(jsonobject.objects[i].Name);
                     marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long])
                         .bindPopup(jsonobject.objects[i].Name)
-                        .addTo(waypoints);
+                        .addTo(targets);
                 }
             }
         };
