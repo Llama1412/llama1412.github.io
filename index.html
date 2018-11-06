@@ -41,7 +41,25 @@
         var dataArrayBackup = ["cartridgename = Llamas Cartridge Builder\n"];
         var dataArray = ["cartridgename = Llamas Cartridge Builder\n"];
         var counter = 1;
+        var DCSJSON = [];
         var lastcoords = [];
+
+        var mymap = L.map('mapid', {
+            layers: [waypoints]
+        }).setView([45.003105, 37.34828], 13);
+
+        function getJSON() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myObj = JSON.parse(this.responseText);
+                    beginLoad(myObj);
+                    return myObj;
+                }
+            };
+            xmlhttp.open("GET", "http://dcs.hoggitworld.com", true);
+            xmlhttp.send();
+        };
 
         function download(data) {
             a = document.createElement("a")
@@ -50,9 +68,20 @@
             a.click();
         };
 
-        var mymap = L.map('mapid', {
-            layers: [waypoints]
-        }).setView([45.003105, 37.34828], 13);
+
+        function beginLoad(jsonobject) {
+            var i;
+            for (i = 0; i < jsonobject.objects.length; i++) {
+                if (jsonobject.objects[i].Coalition == "Allies") {
+                    console.log(jsonobject.objects[i].Name);
+                    marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long])
+                        .bindPopup(jsonobject.objects[i].Name)
+                        .addTo(waypoints);
+                }
+            }
+        };
+
+
 
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
