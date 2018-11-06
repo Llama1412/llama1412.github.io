@@ -51,9 +51,11 @@
         // UNIT ARRAYS //
         var radars = ['S-300PS 40B6M tr', 'S-300PS 40B6MD sr', 'Kub 1S91 str', '1L13 EWR', 'Dog Ear radar'];
         var AAA = ['ZSU-23-4 Shilka', '2S6 Tunguska'];
-        var AD = ['S-300PS 5P85C ln', 'Kub 2P25 ln', 'Osa 9A33 ln', "Strela-1 9P31"];
-        var MANPAD = ["SA-18 Igla-S manpad"];
-        var STATICAA = ["ZU-23 Emplacement Closed"];
+        var AD = ['S-300PS 5P85C ln', 'Kub 2P25 ln', 'Osa 9A33 ln', "Strela-1 9P31", "Tor 9A331", "Strela-10M3"];
+        var MANPAD = ["SA-18 Igla-S manpad", "SA-18 Igla-S comm"];
+        var STATICAA = ["ZU-23 Emplacement Closed", "ZU-23 Emplacement"];
+        var HARD = ["BMD-1", "T-72B", "BMP-2", "BTR-80"];
+        var SOFT = ["Infantry AK", "S-300PS 54K6 cp", "Ural-375 ZU-23", "ZIL-4331", "SKP-11", "Ural-375 PBU"];
 
         // END UNIT ARRAYS //
 
@@ -88,8 +90,6 @@
             for (i = 0; i < jsonobject.objects.length; i++) {
                 if (jsonobject.objects[i].Coalition == "Allies" && jsonobject.objects[i].Flags.Born == true &&
                     jsonobject.objects[i].Type.level1 == 2) {
-                    console.log(jsonobject.objects[i].Name);
-
                     if (radars.includes(jsonobject.objects[i].Name)) {
                         var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
                                 icon: radarico
@@ -122,12 +122,38 @@
                             .addTo(targets);
 
 
+                    } else if (HARD.includes(jsonobject.objects[i].Name)) {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: hardico
+                            })
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+
+
+                    } else if (SOFT.includes(jsonobject.objects[i].Name)) {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: softico
+                            })
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+
+
+                    } else if (jsonobject.objects[i].Name == "outpost") {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: outpostico
+                            })
+                        
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+
+
                     } else {
                         var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
                                 icon: UNKNOWN
                             })
                             .bindPopup(jsonobject.objects[i].Name)
                             .addTo(targets);
+                        console.log(jsonobject.objects[i].Name)
 
                     }
                     //END OF STATEMENT
