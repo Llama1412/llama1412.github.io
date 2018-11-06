@@ -26,7 +26,7 @@
                 <button id="clearButton" type="button" class="btn btn-danger" onclick="clearAll()">Clear</button>
             </li>
             <li class="nav-item">
-                <button id="updateButton" type="button" class="btn btn-primary" onclick="getJSON()">Update targets</button>
+                <button id="updateButton" type="button" class="btn btn-primary" onclick="getJSON()">Add GAW targets</button>
             </li>
             <li class="nav-item">
                 <button id="exportButton" type="button" class="btn btn-success" onclick="download(dataArray.join('\n'))">Export</button>
@@ -48,6 +48,14 @@
         var counter = 1;
         var DCSJSON = [];
         var lastcoords = [];
+        // UNIT ARRAYS //
+        var radars = ['S-300PS 40B6M tr', 'S-300PS 40B6MD sr', 'Kub 1S91 str', '1L13 EWR', 'Dog Ear radar'];
+        var AAA = ['ZSU-23-4 Shilka', '2S6 Tunguska'];
+        var AD = ['S-300PS 5P85C ln', 'Kub 2P25 ln', 'Osa 9A33 ln', "Strela-1 9P31"];
+        var MANPAD = ["SA-18 Igla-S manpad"];
+        var STATICAA = ["ZU-23 Emplacement Closed"];
+
+        // END UNIT ARRAYS //
 
         var mymap = L.map('mapid', {
             layers: [waypoints, targets]
@@ -81,10 +89,56 @@
                 if (jsonobject.objects[i].Coalition == "Allies" && jsonobject.objects[i].Flags.Born == true &&
                     jsonobject.objects[i].Type.level1 == 2) {
                     console.log(jsonobject.objects[i].Name);
-                    marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long])
-                        .bindPopup(jsonobject.objects[i].Name)
-                        .addTo(targets);
+
+                    if (radars.includes(jsonobject.objects[i].Name)) {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: radarico
+                            })
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+                    } else if (AAA.includes(jsonobject.objects[i].Name)) {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: aaaico
+                            })
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+                    } else if (AD.includes(jsonobject.objects[i].Name)) {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: adico
+                            })
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+                    } else if (STATICAA.includes(jsonobject.objects[i].Name)) {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: staticaaico
+                            })
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+                    } else if (MANPAD.includes(jsonobject.objects[i].Name)) {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: manpadico
+                            })
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+
+
+                    } else {
+                        var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt.Long], {
+                                icon: UNKNOWN
+                            })
+                            .bindPopup(jsonobject.objects[i].Name)
+                            .addTo(targets);
+
+                    }
+
+
+
+
+
+                    //END OF STATEMENT
                 }
+
+
             }
         };
 
@@ -100,6 +154,7 @@
 
         function clearAll(e) {
             waypoints.clearLayers();
+            dataArray = [];
             dataArray = dataArrayBackup;
             lastcoords = [];
             counter = 1;
