@@ -132,7 +132,7 @@
 
             function download(data) {
                 a = document.createElement("a")
-                a.href = "data:text/plain," + encodeURIComponent(data);
+                a.href = "data:text/plain;charset=UTF-8," + encodeURIComponent(data);
                 a.download = "CustomCartridge.ini";
                 a.click();
             };
@@ -223,10 +223,10 @@
                         lastcoords.push([lat, long]);
                     };
                     dataArray.push("[B" + counter.toString() + "]"); //ID
-                    dataArray.push("latitude = " + lat.toString()); //lat
+                    dataArray.push("latitude = " + lat.toFixed(4).toString()); //lat
                     dataArray.push("latitudeminutes = 0"); //latmin
                     dataArray.push("latitudeseconds = 0"); //latsec
-                    dataArray.push("longitude = " + long.toString()); //long
+                    dataArray.push("longitude = " + long.toFixed(4).toString()); //long
                     dataArray.push("longitudeminutes = 0"); //longmin
                     dataArray.push("longitudeseconds = 0"); //longsec
                     dataArray.push("missiontime = 0"); //mistime
@@ -432,10 +432,10 @@
                         lastcoords.push(e.latlng);
                     };
                     dataArray.push("[B" + counter.toString() + "]"); //ID
-                    dataArray.push("latitude = " + e.latlng.lat.toString()); //lat
+                    dataArray.push("latitude = " + e.latlng.lat.toFixed(4).toString()); //lat
                     dataArray.push("latitudeminutes = 0"); //latmin
                     dataArray.push("latitudeseconds = 0"); //latsec
-                    dataArray.push("longitude = " + e.latlng.lng.toString()); //long
+                    dataArray.push("longitude = " + e.latlng.lng.toFixed(4).toString()); //long
                     dataArray.push("longitudeminutes = 0"); //longmin
                     dataArray.push("longitudeseconds = 0"); //longsec
                     dataArray.push("missiontime = 0"); //mistime
