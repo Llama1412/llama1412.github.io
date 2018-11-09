@@ -2,6 +2,7 @@
 
 <head>
     <link rel="shortcut icon" href="favicon.ico" />
+    <script src="js\jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
         crossorigin="" />
     <link rel="stylesheet" href="css\cursorstyle.css">
@@ -39,7 +40,7 @@
 </nav>
 
 
-<body onload="getAirports()">
+<body onload="getJSON()">
     <div id="mapid" style="height: 90%; cursor: crosshair;" onload="getAirports()">
         <script>
             var waypoints = L.layerGroup();
@@ -57,7 +58,7 @@
             var AD = ['S-300PS 5P85C ln', 'Kub 2P25 ln', 'Osa 9A33 ln', "Strela-1 9P31", "Tor 9A331", "Strela-10M3"];
             var MANPAD = ["SA-18 Igla-S manpad", "SA-18 Igla-S comm"];
             var STATICAA = ["ZU-23 Emplacement Closed", "ZU-23 Emplacement"];
-            var HARD = ["BMD-1", "T-72B", "BMP-2", "BTR-80"];
+            var HARD = ["BMD-1", "T-72B", "BMP-2", "BTR-80", "SAU Msta"];
             var SOFT = ["Infantry AK", "S-300PS 54K6 cp", "Ural-375 ZU-23", "ZIL-4331", "SKP-11", "Ural-375 PBU"];
 
             // END UNIT ARRAYS //
@@ -71,7 +72,9 @@
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         myObj = JSON.parse(this.responseText);
+                        beginAirports(myObj);
                         beginLoad(myObj);
+
                         return myObj;
                     }
                 };
