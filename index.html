@@ -98,14 +98,32 @@
                 var i;
                 for (i = 0; i < jsonobject.airports.length; i++) {
                     if (jsonobject.airports[i].Name !== 'woRunWay') {
-                        var marker = L.marker([jsonobject.airports[i].LatLongAlt.Lat, jsonobject.airports[i].LatLongAlt
+                        if (jsonobject.airports[i].Coalition == "Allies") {
+                            var marker = L.marker([jsonobject.airports[i].LatLongAlt.Lat, jsonobject.airports[i].LatLongAlt
                                 .Long
                             ], {
-                                icon: airportico
-                            })
-                            .bindPopup("Airport Name: <b>" + jsonobject.airports[i].Name + "</b>")
-                            .addTo(airports);
+                                    icon: airportredico
+                                })
+                                .bindPopup("Airport Name: <b>" + jsonobject.airports[i].Name + "</b>")
+                                .addTo(airports);
 
+                        } else if (jsonobject.airports[i].Coalition == "Enemies") {
+                            var marker = L.marker([jsonobject.airports[i].LatLongAlt.Lat, jsonobject.airports[i].LatLongAlt
+                                .Long
+                            ], {
+                                    icon: airportblueico
+                                })
+                                .bindPopup("Airport Name: <b>" + jsonobject.airports[i].Name + "</b>")
+                                .addTo(airports);
+                        } else {
+                            var marker = L.marker([jsonobject.airports[i].LatLongAlt.Lat, jsonobject.airports[i].LatLongAlt
+                                .Long
+                            ], {
+                                    icon: airportico
+                                })
+                                .bindPopup("Airport Name: <b>" + jsonobject.airports[i].Name + "</b>")
+                                .addTo(airports);
+                        };
                     };
 
 
@@ -114,7 +132,7 @@
 
             function download(data) {
                 a = document.createElement("a")
-                a.href = "data:text/plain," + encodeURIComponent(data);
+                a.href = "data:text/plain;charset=UTF-8," + encodeURIComponent(data);
                 a.download = "CustomCartridge.ini";
                 a.click();
             };
@@ -125,64 +143,64 @@
                 if (counter <= 8) {
                     if (counter == 1) {
                         var marker = L.marker([lat, long], {
-                                icon: B1
-                            })
+                            icon: B1
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
                     } else if (counter == 2) {
                         var marker = L.marker([lat, long], {
-                                icon: B2
-                            })
+                            icon: B2
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
                     } else if (counter == 3) {
                         var marker = L.marker([lat, long], {
-                                icon: B3
-                            })
+                            icon: B3
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
                     } else if (counter == 2) {
                         var marker = L.marker([lat, long], {
-                                icon: B3
-                            })
+                            icon: B3
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
                     } else if (counter == 4) {
                         var marker = L.marker([lat, long], {
-                                icon: B4
-                            })
+                            icon: B4
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
                     } else if (counter == 5) {
                         var marker = L.marker([lat, long], {
-                                icon: B5
-                            })
+                            icon: B5
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
                     } else if (counter == 6) {
                         var marker = L.marker([lat, long], {
-                                icon: B6
-                            })
+                            icon: B6
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
                     } else if (counter == 7) {
                         var marker = L.marker([lat, long], {
-                                icon: B7
-                            })
+                            icon: B7
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
                     } else if (counter == 8) {
                         var marker = L.marker([lat, long], {
-                                icon: B8
-                            })
+                            icon: B8
+                        })
                             .bindPopup("Waypoint <b>M" + counter.toString() + "</b> at <b>" + lat.toString() + long.toString() +
                                 "</b>")
                             .addTo(waypoints);
@@ -205,10 +223,10 @@
                         lastcoords.push([lat, long]);
                     };
                     dataArray.push("[B" + counter.toString() + "]"); //ID
-                    dataArray.push("latitude = " + lat.toString()); //lat
+                    dataArray.push("latitude = " + lat.toFixed(4).toString()); //lat
                     dataArray.push("latitudeminutes = 0"); //latmin
                     dataArray.push("latitudeseconds = 0"); //latsec
-                    dataArray.push("longitude = " + long.toString()); //long
+                    dataArray.push("longitude = " + long.toFixed(4).toString()); //long
                     dataArray.push("longitudeminutes = 0"); //longmin
                     dataArray.push("longitudeseconds = 0"); //longsec
                     dataArray.push("missiontime = 0"); //mistime
@@ -234,8 +252,8 @@
                         jsonobject.objects[i].Type.level1 == 2) {
                         if (radars.includes(jsonobject.objects[i].Name)) {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: radarico
                                 })
                                 .bindPopup(jsonobject.objects[i].Name + "<br>" + "<button onclick='addTargetWaypoint(" +
@@ -244,8 +262,8 @@
                                 .addTo(targets);
                         } else if (AAA.includes(jsonobject.objects[i].Name)) {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: aaaico
                                 })
                                 .bindPopup(jsonobject.objects[i].Name + "<br>" + "<button onclick='addTargetWaypoint(" +
@@ -254,8 +272,8 @@
                                 .addTo(targets);
                         } else if (AD.includes(jsonobject.objects[i].Name)) {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: adico
                                 })
                                 .bindPopup(jsonobject.objects[i].Name + "<br>" + "<button onclick='addTargetWaypoint(" +
@@ -264,8 +282,8 @@
                                 .addTo(targets);
                         } else if (STATICAA.includes(jsonobject.objects[i].Name)) {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: staticaaico
                                 })
                                 .bindPopup(jsonobject.objects[i].Name + "<br>" + "<button onclick='addTargetWaypoint(" +
@@ -274,8 +292,8 @@
                                 .addTo(targets);
                         } else if (MANPAD.includes(jsonobject.objects[i].Name)) {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: manpadico
                                 })
                                 .bindPopup(jsonobject.objects[i].Name + "<br>" + "<button onclick='addTargetWaypoint(" +
@@ -286,8 +304,8 @@
 
                         } else if (HARD.includes(jsonobject.objects[i].Name)) {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: hardico
                                 })
                                 .bindPopup(jsonobject.objects[i].Name + "<br>" + "<button onclick='addTargetWaypoint(" +
@@ -298,8 +316,8 @@
 
                         } else if (SOFT.includes(jsonobject.objects[i].Name)) {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: softico
                                 })
                                 .bindPopup(jsonobject.objects[i].Name + "<br>" + "<button onclick='addTargetWaypoint(" +
@@ -310,8 +328,8 @@
 
                         } else if (jsonobject.objects[i].Name == "outpost") {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: outpostico
                                 })
 
@@ -323,8 +341,8 @@
 
                         } else {
                             var marker = L.marker([jsonobject.objects[i].LatLongAlt.Lat, jsonobject.objects[i].LatLongAlt
-                                    .Long
-                                ], {
+                                .Long
+                            ], {
                                     icon: UNKNOWN
                                 })
                                 .bindPopup(jsonobject.objects[i].Name + "<br>" + "<button onclick='addTargetWaypoint(" +
@@ -343,56 +361,56 @@
                 if (counter <= 8) {
                     if (counter == 1) {
                         var marker = L.marker(e.latlng, {
-                                icon: B1
-                            })
+                            icon: B1
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     } else if (counter == 2) {
                         var marker = L.marker(e.latlng, {
-                                icon: B2
-                            })
+                            icon: B2
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     } else if (counter == 3) {
                         var marker = L.marker(e.latlng, {
-                                icon: B3
-                            })
+                            icon: B3
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     } else if (counter == 2) {
                         var marker = L.marker(e.latlng, {
-                                icon: B3
-                            })
+                            icon: B3
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     } else if (counter == 4) {
                         var marker = L.marker(e.latlng, {
-                                icon: B4
-                            })
+                            icon: B4
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     } else if (counter == 5) {
                         var marker = L.marker(e.latlng, {
-                                icon: B5
-                            })
+                            icon: B5
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     } else if (counter == 6) {
                         var marker = L.marker(e.latlng, {
-                                icon: B6
-                            })
+                            icon: B6
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     } else if (counter == 7) {
                         var marker = L.marker(e.latlng, {
-                                icon: B7
-                            })
+                            icon: B7
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     } else if (counter == 8) {
                         var marker = L.marker(e.latlng, {
-                                icon: B8
-                            })
+                            icon: B8
+                        })
                             .bindPopup("Waypoint <b>B" + counter.toString() + "</b> at <b>" + e.latlng + "</b>")
                             .addTo(waypoints);
                     }
@@ -414,10 +432,10 @@
                         lastcoords.push(e.latlng);
                     };
                     dataArray.push("[B" + counter.toString() + "]"); //ID
-                    dataArray.push("latitude = " + e.latlng.lat.toString()); //lat
+                    dataArray.push("latitude = " + e.latlng.lat.toFixed(4).toString()); //lat
                     dataArray.push("latitudeminutes = 0"); //latmin
                     dataArray.push("latitudeseconds = 0"); //latsec
-                    dataArray.push("longitude = " + e.latlng.lng.toString()); //long
+                    dataArray.push("longitude = " + e.latlng.lng.toFixed(4).toString()); //long
                     dataArray.push("longitudeminutes = 0"); //longmin
                     dataArray.push("longitudeseconds = 0"); //longsec
                     dataArray.push("missiontime = 0"); //mistime
