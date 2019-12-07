@@ -5,6 +5,7 @@
             rel="stylesheet"
             href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
         />
+        <link rel="stylesheet" href="css\myStyle.css" />
         <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
         <script src="js/icons.js"></script>
         <style>
@@ -40,6 +41,39 @@
         </script>
 
         <script>
+            function toDecimal(number) {
+                var deg = Math.floor(number).toString();
+                var minutes = ((number - deg) * 60).toFixed(3);
+
+                if (deg.length < 2) {
+                    deg = "0" + deg;
+                }
+
+                if (minutes.length < 6) {
+                    minutes = "0" + minutes;
+                }
+
+                return deg + "°" + minutes;
+            }
+
+            function toSec(number) {
+                var deg = Math.floor(number).toString();
+                var mins = Math.floor((number-deg)*60).toString();
+                var seconds = ((((number-deg)*60) - Math.floor((number-deg)*60))*60).toFixed(0);
+
+                if (deg.length < 2) {
+                    deg = "0" + deg;
+                }
+                if (mins.length < 2) {
+                    mins = "0" + mins;
+                }
+                if (seconds.length < 2) {
+                    seconds = "0" + seconds;
+                }
+
+                return deg + "°" + mins + "\'" + seconds + "\"";
+            }
+
             function fetchJSON() {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
@@ -66,11 +100,41 @@
                                 {
                                     icon: airportredico
                                 }
-                            )
+                            ) // toDecimal(jsonobject.airports[i].LatLongAlt.Lat)
                                 .bindPopup(
-                                    "<b>" +
+                                    "<h3>" +
                                         jsonobject.airports[i].Name +
-                                        "</b>"
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table>"
                                 )
                                 .addTo(airports);
                         } else if (
@@ -86,9 +150,7 @@
                                 }
                             )
                                 .bindPopup(
-                                    "<b>" +
-                                        jsonobject.airports[i].Name +
-                                        "</b>"
+                                    "<b>" + jsonobject.airports[i].Name + "</b>"
                                 )
                                 .addTo(airports);
                         } else {
@@ -102,9 +164,7 @@
                                 }
                             )
                                 .bindPopup(
-                                    "<b>" +
-                                        jsonobject.airports[i].Name +
-                                        "</b>"
+                                    "<b>" + jsonobject.airports[i].Name + "</b>"
                                 )
                                 .addTo(airports);
                         }
