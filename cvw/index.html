@@ -164,6 +164,7 @@
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         myObj = JSON.parse(this.responseText);
+                        addShips(myObj);
                         addAirports(myObj);
                         addUnits(myObj);
                         return myObj;
@@ -171,6 +172,105 @@
                 };
                 xmlhttp.open("GET", "http://dcs.cvw-69.com", true);
                 xmlhttp.send();
+            }
+
+            function addShips(jsonobject) {
+                for (var i = 0; i < jsonobject.objects.length; i++) {
+                    if (
+                        jsonobject.objects[i].Flags.Born == true &&
+                        jsonobject.objects[i].Type.level1 == 3
+                    ) {
+                        if (jsonobject.objects[i].Coalition == "Allies") {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: shipredico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>0" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>0" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table>"
+                                )
+                                .addTo(targets);
+                        } else {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: shipblueico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>0" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>0" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table>"
+                                )
+                                .addTo(targets);
+                        }
+                    }
+                }
             }
 
             function addUnits(jsonobject) {
@@ -202,7 +302,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -214,7 +314,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -250,7 +350,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -262,7 +362,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -298,7 +398,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -310,7 +410,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -348,7 +448,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -360,7 +460,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -398,7 +498,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -410,7 +510,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -446,7 +546,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -458,7 +558,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -494,7 +594,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -506,7 +606,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -544,7 +644,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -556,7 +656,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -592,7 +692,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toDecimal(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long
@@ -604,7 +704,7 @@
                                             jsonobject.objects[i].LatLongAlt.Lat
                                         ) +
                                         "</td>" +
-                                        "<td>" +
+                                        "<td>0" +
                                         toSec(
                                             jsonobject.objects[i].LatLongAlt
                                                 .Long

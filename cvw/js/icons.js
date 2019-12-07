@@ -1,3 +1,22 @@
+
+var shipredico = L.icon({
+    iconUrl: 'icons/shipred.png',
+    iconSize:     [30, 30], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
+});
+
+
+var shipblueico = L.icon({
+    iconUrl: 'icons/shipblue.png',
+    iconSize:     [30, 30], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
+});
+
+
 var aaaico = L.icon({
     iconUrl: 'icons/aaa.png',
     iconSize:     [30, 30], // size of the icon
