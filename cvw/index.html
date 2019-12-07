@@ -30,8 +30,7 @@
             L.tileLayer(
                 "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
                 {
-                    attribution:
-                        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    attribution: "CVW-69 Honeybadgers",
                     maxZoom: 100,
                     id: "mapbox.dark",
                     accessToken:
@@ -41,6 +40,89 @@
         </script>
 
         <script>
+            var radars = [
+                "S-300PS 40B6M tr",
+                "S-300PS 40B6MD sr",
+                "Kub 1S91 str",
+                "1L13 EWR",
+                "Dog Ear radar",
+                "snr s-125 tr",
+                "p-19 s-125 sr",
+                "55G6 EWR",
+                "S-300PS 64H6E sr",
+                "Silkworm_SR",
+                "Hawk tr",
+                "Hawk cwar",
+                "Hawk sr",
+                "SA-11 Buk SR 9S18M1"
+            ];
+            var AAA = ["ZSU-23-4 Shilka", "2S6 Tunguska"];
+            var AD = [
+                "S-300PS 5P85C ln",
+                "Kub 2P25 ln",
+                "Osa 9A33 ln",
+                "Strela-1 9P31",
+                "Tor 9A331",
+                "Strela-10M3",
+                "5p73 s-125 ln",
+                "Hawk ln",
+                "S_75M_Volhov",
+                "SA-11 Buk LN 9A310M1",
+                "S-300PS 5P85D ln"
+            ];
+            var MANPAD = [
+                "SA-18 Igla-S manpad",
+                "SA-18 Igla-S comm",
+                "Igla manpad INS"
+            ];
+            var STATICAA = [
+                "ZU-23 Emplacement Closed",
+                "ZU-23 Emplacement",
+                "ZU-23 Closed Insurgent"
+            ];
+            var HARD = [
+                "BMD-1",
+                "T-72B",
+                "BMP-2",
+                "BTR-80",
+                "SAU Msta",
+                "BRDM-2",
+                "BMP-1",
+                "BMP-3",
+                "SAU Gvozdika",
+                "T-55",
+                "SA-11 Buk CC 9S470M1"
+            ];
+            var SOFT = [
+                "Infantry AK",
+                "S-300PS 54K6 cp",
+                "Ural-375 ZU-23",
+                "ZIL-4331",
+                "SKP-11",
+                "Ural-375 PBU",
+                "KAMAZ Truck",
+                "Ural-375",
+                "ATZ-10",
+                "Uragan_BM-27",
+                "Grad-URAL",
+                "Ural-375 ZU-23 Insurgent",
+                "hy_launcher",
+                "Land_Rover_109_S3",
+                "Ural-4320T",
+                ,
+                "Paratrooper AKS-74",
+                "Hawk pcp",
+                "KrAZ6322",
+                "Land_Rover_101_FC"
+            ];
+            var BUILDINGS = [
+                "outpost",
+                "outpost_road",
+                "house2arm",
+                "house1arm",
+                "Sandbox"
+            ];
+
             function toDecimal(number) {
                 var deg = Math.floor(number).toString();
                 var minutes = ((number - deg) * 60).toFixed(3);
@@ -83,12 +165,419 @@
                     if (this.readyState == 4 && this.status == 200) {
                         myObj = JSON.parse(this.responseText);
                         addAirports(myObj);
-                        //beginLoad(myObj);
+                        addUnits(myObj);
                         return myObj;
                     }
                 };
                 xmlhttp.open("GET", "http://dcs.cvw-69.com", true);
                 xmlhttp.send();
+            }
+
+            function addUnits(jsonobject) {
+                for (var i = 0; i < jsonobject.objects.length; i++) {
+                    if (
+                        jsonobject.objects[i].Coalition == "Allies" &&
+                        jsonobject.objects[i].Flags.Born == true &&
+                        jsonobject.objects[i].Type.level1 == 2
+                    ) {
+                        if (radars.includes(jsonobject.objects[i].Name)) {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: radarico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"
+                                )
+                                .addTo(targets);
+                        } else if (AAA.includes(jsonobject.objects[i].Name)) {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: aaaico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"                                )
+                                .addTo(targets);
+                        } else if (AD.includes(jsonobject.objects[i].Name)) {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: adico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"                                )
+                                .addTo(targets);
+                        } else if (
+                            STATICAA.includes(jsonobject.objects[i].Name)
+                        ) {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: staticaaico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"                                )
+                                .addTo(targets);
+                        } else if (
+                            MANPAD.includes(jsonobject.objects[i].Name)
+                        ) {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: manpadico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"                                )
+                                .addTo(targets);
+                        } else if (HARD.includes(jsonobject.objects[i].Name)) {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: hardico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"                                )
+                                .addTo(targets);
+                        } else if (SOFT.includes(jsonobject.objects[i].Name)) {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: softico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"                                )
+                                .addTo(targets);
+                        } else if (
+                            BUILDINGS.includes(jsonobject.objects[i].Name)
+                        ) {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: outpostico
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"                                )
+                                .addTo(targets);
+                        } else {
+                            var marker = L.marker(
+                                [
+                                    jsonobject.objects[i].LatLongAlt.Lat,
+                                    jsonobject.objects[i].LatLongAlt.Long
+                                ],
+                                {
+                                    icon: UNKNOWN
+                                }
+                            )
+                                .bindPopup(
+                                    "<h3>" +
+                                        jsonobject.objects[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt.Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.objects[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table><b>Alt: " + jsonobject.objects[i].LatLongAlt.Alt.toFixed(0) + "ft</b>"                                )
+                                .addTo(targets);
+                            console.log(jsonobject.objects[i].Name);
+                        }
+                    }
+                }
             }
 
             function addAirports(jsonobject) {
