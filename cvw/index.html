@@ -58,8 +58,11 @@
 
             function toSec(number) {
                 var deg = Math.floor(number).toString();
-                var mins = Math.floor((number-deg)*60).toString();
-                var seconds = ((((number-deg)*60) - Math.floor((number-deg)*60))*60).toFixed(0);
+                var mins = Math.floor((number - deg) * 60).toString();
+                var seconds = (
+                    ((number - deg) * 60 - Math.floor((number - deg) * 60)) *
+                    60
+                ).toFixed(0);
 
                 if (deg.length < 2) {
                     deg = "0" + deg;
@@ -71,7 +74,7 @@
                     seconds = "0" + seconds;
                 }
 
-                return deg + "°" + mins + "\'" + seconds + "\"";
+                return deg + "°" + mins + "'" + seconds + '"';
             }
 
             function fetchJSON() {
@@ -150,7 +153,39 @@
                                 }
                             )
                                 .bindPopup(
-                                    "<b>" + jsonobject.airports[i].Name + "</b>"
+                                    "<h3>" +
+                                        jsonobject.airports[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table>"
                                 )
                                 .addTo(airports);
                         } else {
@@ -164,7 +199,39 @@
                                 }
                             )
                                 .bindPopup(
-                                    "<b>" + jsonobject.airports[i].Name + "</b>"
+                                    "<h3>" +
+                                        jsonobject.airports[i].Name +
+                                        "</h3>" +
+                                        "<table>" +
+                                        "<tr><th></th><th>North</th><th>East</th></tr>" +
+                                        "<tr><td>DEC</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toDecimal(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "<tr><td>SEC</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Lat
+                                        ) +
+                                        "</td>" +
+                                        "<td>" +
+                                        toSec(
+                                            jsonobject.airports[i].LatLongAlt
+                                                .Long
+                                        ) +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "</table>"
                                 )
                                 .addTo(airports);
                         }
